@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Billur Home</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+}
+
+.card {
+    width: 320px;
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    background: rgba(255,255,255,0.08);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+.logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.title {
+    color: #fff;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.link:hover {
+    transform: scale(1.05);
+}
+
+/* ranglar */
+.phone { background: linear-gradient(45deg,#00c853,#64dd17); }
+.instagram { background: linear-gradient(45deg,#ff512f,#dd2476); }
+.telegram { background: linear-gradient(45deg,#2193b0,#6dd5ed); }
+.yandex { background: linear-gradient(45deg,#ff7e00,#ffb347); }
+.menu { background: linear-gradient(45deg,#7f00ff,#e100ff); }
+
+.footer {
+    margin-top: 15px;
+    font-size: 12px;
+    color: #aaa;
+}
+</style>
+
+</head>
+<body>
+
+<div class="card">
+
+    <!-- LOGO -->
+    <img src="logo.png" class="logo">
+
+    <div class="title">Billur Home</div>
+
+    <!-- TELEFON -->
+    <a href="tel:+998943650036" class="link phone">📞 Telefon</a>
+
+    <!-- INSTAGRAM -->
+    <a href="https://www.instagram.com/grato_food?igsh=MTR0dWNsM3poamkwag==" target="_blank" class="link instagram">📸 Instagram</a>
+
+    <!-- TELEGRAM -->
+    <a href="https://t.me/Grato_kafe" target="_blank" class="link telegram">✈️ Telegram</a>
+
+    <!-- YANDEX -->
+    <a href="https://yandex.ru/navi/org/grato/68324601379?si=511a2g1j6xtmph5h52tn3mj46w" target="_blank" class="link yandex">📍 Manzil</a>
+
+    <!-- ONLINE MENU -->
+    <a href="https://nematillomaqsudov.github.io/grato-menu/" target="_blank" class="link menu">🍽 Online Menu</a>
+
+    <div class="footer">Powered by You</div>
+
+</div>
+
+</body>
+</html>
