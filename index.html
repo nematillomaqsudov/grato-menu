@@ -8,14 +8,71 @@
 <style>
 body {
   margin: 0;
-  font-family: sans-serif;
-  background: #111;
+  font-family: 'Segoe UI', sans-serif;
+  background: #0f0f0f;
   color: white;
 }
 
+/* TITLE */
 h2 {
   text-align: center;
-  margin: 15px 0;
+  margin: 10px 0;
+  font-size: 24px;
+}
+
+/* STICKY TOP */
+.topbar {
+  position: sticky;
+  top: 0;
+  background: #0f0f0f;
+  z-index: 1000;
+  padding-bottom: 10px;
+}
+
+/* SEARCH */
+.search {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.search input {
+  width: 90%;
+  max-width: 400px;
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+/* BUTTONS */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+button {
+  padding: 10px 16px;
+  border-radius: 25px;
+  border: none;
+  background: #1e1e1e;
+  color: #ccc;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #333;
+  color: white;
+}
+
+button.active {
+  background: #ef7918;
+  color: white;
+  box-shadow: 0 0 10px rgba(239,121,24,0.5);
 }
 
 /* GRID */
@@ -29,9 +86,14 @@ h2 {
 /* CARD */
 .card {
   position: relative;
-  border-radius: 15px;
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.03);
 }
 
 /* IMAGE */
@@ -41,7 +103,7 @@ h2 {
   object-fit: cover;
 }
 
-/* TEXT */
+/* TEXT OVERLAY */
 .info {
   position: absolute;
   bottom: 0;
@@ -52,75 +114,111 @@ h2 {
 
 .info h3 {
   margin: 0;
-  font-size: 18px;
+  font-size: 17px;
 }
 
 .info p {
   margin: 5px 0 0;
-  font-size: 18px;
+  font-size: 16px;
   color: #ef7918;
   font-weight: bold;
+}
+
+/* TELEGRAM BUTTON */
+.telegram {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #0088cc;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 14px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
 }
 </style>
 </head>
 
 <body>
 
-<h2>Menyu</h2>
+<h2>🍽️ Menyu</h2>
 
-<div class="menu">
+<div class="topbar">
 
-  <!-- OLD -->
-  <div class="card">
-    <img src="https://raw.githubusercontent.com/nematillomaqsudov/grato-menu/main/IMG_6240.PNG">
-    <div class="info">
-      <h3>Uy'gur Lag'mon</h3>
-      <p>25 000 so'm</p>
-    </div>
+  <div class="search">
+    <input type="text" id="search" placeholder="🔍 Qidirish...">
   </div>
 
-  <div class="card">
-    <img src="https://raw.githubusercontent.com/nematillomaqsudov/grato-menu/main/IMG_6243.PNG">
-    <div class="info">
-      <h3>Lag'mon</h3>
-      <p>22 000 so'm</p>
-    </div>
-  </div>
-
-  <!-- NEW optimized -->
-  <div class="card">
-    <img src="https://raw.githubusercontent.com/nematillomaqsudov/grato-menu/main/optimized_1.webp">
-    <div class="info">
-      <h3>Osh</h3>
-      <p>30 000 so'm</p>
-    </div>
-  </div>
-
-  <div class="card">
-    <img src="https://raw.githubusercontent.com/nematillomaqsudov/grato-menu/main/optimized_2.webp">
-    <div class="info">
-      <h3>Manti</h3>
-      <p>28 000 so'm</p>
-    </div>
-  </div>
-
-  <div class="card">
-    <img src="https://raw.githubusercontent.com/nematillomaqsudov/grato-menu/main/optimized_3.webp">
-    <div class="info">
-      <h3>Shashlik</h3>
-      <p>32 000 so'm</p>
-    </div>
-  </div>
-
-  <div class="card">
-    <img src="https://raw.githubusercontent.com/nematillomaqsudov/grato-menu/main/optimized_5.webp">
-    <div class="info">
-      <h3>Sho'rva</h3>
-      <p>27 000 so'm</p>
-    </div>
+  <div class="buttons">
+    <button onclick="filter('all')" class="active">🍽️ Hammasi</button>
+    <button onclick="filter('first')">🍲 1-taom</button>
+    <button onclick="filter('second')">🍖 2-taom</button>
+    <button onclick="filter('salad')">🥗 Salatlar</button>
   </div>
 
 </div>
+
+<div class="menu">
+
+  <!-- 1-taom -->
+  <div class="card first">
+    <img src="https://raw.githubusercontent.com/nematillomaqsudov/grato-menu/main/optimized_1.webp">
+    <div class="info"><h3>Tushonka</h3><p>40 000 so'm</p></div>
+  </div>
+
+  <div class="card first">
+    <img src="https://raw.githubusercontent.com/nematillomaqsudov/grato-menu/main/optimized_2.webp">
+    <div class="info"><h3>Balaza</h3><p>25 000 so'm</p></div>
+  </div>
+
+  <!-- 2-taom -->
+  <div class="card second">
+    <img src="https://raw.githubusercontent.com/nematillomaqsudov/grato-menu/main/optimized_3.webp">
+    <div class="info"><h3>Frikadelki</h3><p>25 000 so'm</p></div>
+  </div>
+
+  <!-- Salat -->
+  <div class="card salad">
+    <img src="https://raw.githubusercontent.com/nematillomaqsudov/grato-menu/main/optimized_5.webp">
+    <div class="info"><h3>Solyanka</h3><p>30 000 so'm</p></div>
+  </div>
+
+</div>
+
+<a href="https://t.me/Grato_kafe" class="telegram">💬 Buyurtma</a>
+
+<script>
+let currentFilter = "all";
+
+function filter(type) {
+  currentFilter = type;
+
+  document.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+  event.target.classList.add("active");
+
+  applyFilters();
+}
+
+document.getElementById("search").addEventListener("input", applyFilters);
+
+function applyFilters() {
+  let search = document.getElementById("search").value.toLowerCase();
+  let cards = document.querySelectorAll(".card");
+
+  cards.forEach(card => {
+    let text = card.innerText.toLowerCase();
+    let matchCategory = currentFilter === "all" || card.classList.contains(currentFilter);
+    let matchSearch = text.includes(search);
+
+    if (matchCategory && matchSearch) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+  });
+}
+</script>
 
 </body>
 </html>
