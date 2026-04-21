@@ -27,19 +27,29 @@ body {
     width: 320px;
     padding: 25px;
     border-radius: 20px;
-    backdrop-filter: blur(15px);
-    background: rgba(255,255,255,0.08);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+
     text-align: center;
 }
-
 .logo {
-    width: 70px;
-    height: 70px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
-    margin-bottom: 10px;
-}
+    background: #ef7918;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
 
+    /* 🔥 glow */
+    box-shadow: 0 0 20px #ef7918, 0 0 40px #ef7918;
+}
 .title {
     color: #fff;
     font-size: 20px;
@@ -76,6 +86,57 @@ body {
     margin-top: 15px;
     font-size: 16px;
     color: white;
+}
+
+    /* 🔥 BUTTON STYLE */
+.buttons a {
+    display: block;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 12px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+/* 🔥 HOVER EFFECT */
+.buttons a:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+/* 🔥 CLICK EFFECT */
+.buttons a:active {
+    transform: scale(0.95);
+}
+    /* 🔥 LOGO GLOW */
+.logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+
+    box-shadow: 0 0 20px #ef7918, 0 0 40px #ef7918;
+
+    transition: all 0.3s ease;
+}
+
+/* 🔥 PULSATSIA ANIMATSIYA */
+@keyframes glowPulse {
+    0% {
+        box-shadow: 0 0 10px #ef7918;
+    }
+    50% {
+        box-shadow: 0 0 30px #ef7918, 0 0 60px #ef7918;
+    }
+    100% {
+        box-shadow: 0 0 10px #ef7918;
+    }
+}
+
+/* 🔥 ANIMATION APPLY */
+.logo {
+    animation: glowPulse 2s infinite;
 }
 </style>
 
