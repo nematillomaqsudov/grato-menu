@@ -18,6 +18,26 @@ h2 {
   margin: 10px 0;
 }
 
+.search-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 0 15px 10px;
+}
+
+#searchInput {
+  width: min(600px, 100%);
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid #333;
+  background: #1a1a1a;
+  color: #fff;
+  outline: none;
+}
+
+#searchInput:focus {
+  border-color: #ef7918;
+}
+
 /* BUTTONS */
 .buttons {
   display: flex;
@@ -45,6 +65,13 @@ button.active {
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 15px;
   padding: 15px;
+}
+
+#emptyState {
+  display: none;
+  text-align: center;
+  color: #cfcfcf;
+  padding: 8px 15px 20px;
 }
 
 /* CARD */
@@ -99,11 +126,15 @@ button.active {
 
 <h2> Menyu</h2>
 
+<div class="search-wrap">
+  <input id="searchInput" type="text" placeholder="Taom nomi bo‘yicha qidirish...">
+</div>
+
 <div class="buttons">
-  <button onclick="filter('all')" class="active">Hammasi</button>
-  <button onclick="filter('first')">1-taom</button>
-  <button onclick="filter('second')">2-taom</button>
-  <button onclick="filter('salat')">Salatlar</button>
+  <button data-type="all" onclick="filter('all', this)" class="active">Hammasi</button>
+  <button data-type="first" onclick="filter('first', this)">1-taom</button>
+  <button data-type="second" onclick="filter('second', this)">2-taom</button>
+  <button data-type="salat" onclick="filter('salat', this)">Salatlar</button>
 </div>
 
 <div class="menu">
@@ -269,23 +300,48 @@ button.active {
 </div>      
 
 </div>
+<p id="emptyState">Hech narsa topilmadi.</p>
 
 <script>
-function filter(type) {
-  let cards = document.querySelectorAll(".card");
-  let buttons = document.querySelectorAll("button");
+let currentFilter = "all";
+const cards = document.querySelectorAll(".card");
+const buttons = document.querySelectorAll(".buttons button");
+const searchInput = document.getElementById("searchInput");
+const emptyState = document.getElementById("emptyState");
 
-  buttons.forEach(b => b.classList.remove("active"));
-  event.target.classList.add("active");
+function applyFilters() {
+  const query = searchInput.value.trim().toLowerCase();
+  let visibleCount = 0;
 
   cards.forEach(card => {
-    if (type === "all" || card.classList.contains(type)) {
-      card.style.display = "block";
-    } else {
-      card.style.display = "none";
-    }
+    const titleEl = card.querySelector("h3");
+    const title = titleEl ? titleEl.textContent.toLowerCase() : "";
+    const byCategory = currentFilter === "all" || card.classList.contains(currentFilter);
+    const bySearch = query === "" || title.includes(query);
+    const isVisible = byCategory && bySearch;
+
+    card.style.display = isVisible ? "block" : "none";
+    if (isVisible) visibleCount++;
   });
+
+  emptyState.style.display = visibleCount === 0 ? "block" : "none";
 }
+
+function setFilter(type, clickedButton) {
+  currentFilter = type;
+  buttons.forEach(b => b.classList.remove("active"));
+  if (clickedButton) clickedButton.classList.add("active");
+  applyFilters();
+}
+
+function filter(type, clickedButton) {
+  setFilter(type, clickedButton);
+}
+
+window.filter = filter;
+
+searchInput.addEventListener("input", applyFilters);
+applyFilters();
 </script>
 
   <a href="https://t.me/Gratodeliverybot" class="order-fixed">
