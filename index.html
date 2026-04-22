@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Grato Kafe</title>
+<meta name="description" content="Grato Kafe rasmiy sahifasi: telefon, Telegram, Instagram, manzil va onlayn menyu.">
+<meta property="og:title" content="Grato Kafe">
+<meta property="og:description" content="Grato Kafe bilan bog'laning: telefon, Telegram, Instagram, manzil va onlayn menyu.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nematillomaqsudov.github.io/grato-menu/">
+<meta property="og:image" content="https://nematillomaqsudov.github.io/grato-menu/Grato.png">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
@@ -24,7 +30,7 @@ body {
 }
 
 .card {
-    width: 320px;
+    width: min(320px, 92vw);
     padding: 25px;
     border-radius: 20px;
 
@@ -40,16 +46,10 @@ body {
     width: 90px;
     height: 90px;
     border-radius: 50%;
-    background: #ef7918;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    color: white;
     margin: 0 auto;
-
-    /* 🔥 glow */
     box-shadow: 0 0 20px #ef7918, 0 0 40px #ef7918;
+    transition: all 0.3s ease;
+    animation: glowPulse 2s infinite;
 }
 .title {
     color: #fff;
@@ -89,39 +89,6 @@ body {
     color: white;
 }
 
-    /* 🔥 BUTTON STYLE */
-.buttons a {
-    display: block;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 12px;
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-
-/* 🔥 HOVER EFFECT */
-.buttons a:hover {
-    transform: translateY(-5px) scale(1.03);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-}
-
-/* 🔥 CLICK EFFECT */
-.buttons a:active {
-    transform: scale(0.95);
-}
-    /* 🔥 LOGO GLOW */
-.logo {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-
-    box-shadow: 0 0 20px #ef7918, 0 0 40px #ef7918;
-
-    transition: all 0.3s ease;
-}
-
 /* 🔥 PULSATSIA ANIMATSIYA */
 @keyframes glowPulse {
     0% {
@@ -135,14 +102,6 @@ body {
     }
 }
 
-/* 🔥 ANIMATION APPLY */
-.logo {
-    animation: glowPulse 2s infinite;
-}
-    /* 🔥 LOGO UNIVERSAL EFFECT */
-.logo {
-    transition: all 0.3s ease;
-}
 
 /* 🔥 DESKTOP HOVER */
 @media (hover: hover) {
@@ -172,18 +131,21 @@ body {
     <a href="tel:+998943650036" class="link phone">📞 Telefon</a>
 
     <!-- TELEGRAM -->
-    <a href="https://t.me/Grato_kafe" target="_blank" class="link telegram">✈️ Telegram</a>
+    <a href="https://t.me/Grato_kafe" target="_blank" rel="noopener noreferrer" class="link telegram">✈️ Telegram</a>
+
+    <!-- INSTAGRAM -->
+    <a href="https://www.instagram.com/grato_food?igsh=MTR0dWNsM3poamkwag==" target="_blank" rel="noopener noreferrer" class="link instagram">📸 Instagram</a>
 
     <!-- INSTAGRAM -->
     <a href="https://www.instagram.com/grato_food?igsh=MTR0dWNsM3poamkwag==" target="_blank" class="link instagram">📸 Instagram</a>
 
     <!-- YANDEX -->
-    <a href="https://yandex.ru/navi/org/grato/68324601379?si=511a2g1j6xtmph5h52tn3mj46w" target="_blank" class="link yandex">📍 Manzil</a>
+    <a href="https://yandex.ru/navi/org/grato/68324601379?si=511a2g1j6xtmph5h52tn3mj46w" target="_blank" rel="noopener noreferrer" class="link yandex">📍 Manzil</a>
 
     <!-- ONLINE MENU -->
-    <a href="https://nematillomaqsudov.github.io/grato-menu/menu.html" target="_blank" class="link menu">🍽 Online Menu</a>
+    <a href="https://nematillomaqsudov.github.io/grato-menu/menu.html" target="_blank" rel="noopener noreferrer" class="link menu">🍽 Online Menu</a>
 
-    <div class="footer">Sizni Gratoda kutib qolamiz)</div>
+    <div class="footer">Sizni Grato kafesida kutib qolamiz!</div>
 
 </div>
 
