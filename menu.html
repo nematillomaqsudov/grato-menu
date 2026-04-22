@@ -131,10 +131,10 @@ button.active {
 </div>
 
 <div class="buttons">
-  <button onclick="filter('all', this)" class="active">Hammasi</button>
-  <button onclick="filter('first', this)">1-taom</button>
-  <button onclick="filter('second', this)">2-taom</button>
-  <button onclick="filter('salat', this)">Salatlar</button>
+  <button data-type="all" class="active">Hammasi</button>
+  <button data-type="first">1-taom</button>
+  <button data-type="second">2-taom</button>
+  <button data-type="salat">Salatlar</button>
 </div>
 
 <div class="menu">
@@ -314,7 +314,8 @@ function applyFilters() {
   let visibleCount = 0;
 
   cards.forEach(card => {
-    const title = card.querySelector("h3")?.textContent.toLowerCase() || "";
+    const titleEl = card.querySelector("h3");
+    const title = titleEl ? titleEl.textContent.toLowerCase() : "";
     const byCategory = currentFilter === "all" || card.classList.contains(currentFilter);
     const bySearch = query === "" || title.includes(query);
     const isVisible = byCategory && bySearch;
@@ -326,14 +327,22 @@ function applyFilters() {
   emptyState.style.display = visibleCount === 0 ? "block" : "none";
 }
 
-function filter(type, clickedButton) {
+function setFilter(type, clickedButton) {
   currentFilter = type;
   buttons.forEach(b => b.classList.remove("active"));
   if (clickedButton) clickedButton.classList.add("active");
   applyFilters();
 }
 
+buttons.forEach(button => {
+  button.addEventListener("click", () => {
+    const type = button.getAttribute("data-type") || "all";
+    setFilter(type, button);
+  });
+});
+
 searchInput.addEventListener("input", applyFilters);
+applyFilters();
 </script>
 
   <a href="https://t.me/Gratodeliverybot" class="order-fixed">
