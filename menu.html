@@ -131,10 +131,10 @@ button.active {
 </div>
 
 <div class="buttons">
-  <button data-type="all" class="active">Hammasi</button>
-  <button data-type="first">1-taom</button>
-  <button data-type="second">2-taom</button>
-  <button data-type="salat">Salatlar</button>
+  <button data-type="all" onclick="filter('all', this)" class="active">Hammasi</button>
+  <button data-type="first" onclick="filter('first', this)">1-taom</button>
+  <button data-type="second" onclick="filter('second', this)">2-taom</button>
+  <button data-type="salat" onclick="filter('salat', this)">Salatlar</button>
 </div>
 
 <div class="menu">
@@ -334,12 +334,11 @@ function setFilter(type, clickedButton) {
   applyFilters();
 }
 
-buttons.forEach(button => {
-  button.addEventListener("click", () => {
-    const type = button.getAttribute("data-type") || "all";
-    setFilter(type, button);
-  });
-});
+function filter(type, clickedButton) {
+  setFilter(type, clickedButton);
+}
+
+window.filter = filter;
 
 searchInput.addEventListener("input", applyFilters);
 applyFilters();
