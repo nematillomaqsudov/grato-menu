@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grato Kafe – Menyu</title>
+<meta name="description" content="Grato Kafe onlayn menyusi: sho'rvalar, ikkinchi taomlar, salatlar va narxlar.">
+<link rel="icon" type="image/png" href="Grato.png">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #0f0f0f;
+  color: white;
+  padding-bottom: 80px;
+}
+
+/* STICKY HEADER */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(15,15,15,0.95);
+  backdrop-filter: blur(10px);
+  padding: 12px 15px 10px;
+  border-bottom: 1px solid #222;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.header-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.header-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ef7918;
+}
+
+/* SEARCH */
+.search-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+#searchInput {
+  width: min(600px, 100%);
+  padding: 9px 14px;
+  border-radius: 12px;
+  border: 1px solid #333;
+  background: #1a1a1a;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+#searchInput:focus { border-color: #ef7918; }
+
+/* FILTER BUTTONS */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.buttons button {
+  padding: 8px 18px;
+  border: 1.5px solid #333;
+  border-radius: 20px;
+  background: transparent;
+  color: #ccc;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.buttons button:hover {
+  border-color: #ef7918;
+  color: #ef7918;
+}
+
+.buttons button.active {
+  background: #ef7918;
+  border-color: #ef7918;
+  color: white;
+}
+
+/* CATEGORY LABEL */
+.category-label {
+  padding: 18px 15px 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ef7918;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  display: none;
+}
+
+.category-label.visible { display: block; }
+
+/* GRID */
+.menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+  padding: 10px 15px;
+}
+
+/* EMPTY STATE */
+#emptyState {
+  display: none;
+  text-align: center;
+  color: #666;
+  padding: 40px 15px;
+  font-size: 15px;
+}
+
+/* CARD */
+.card {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #1a1a1a;
+  transition: transform 0.2s;
+  cursor: default;
+}
+
+.card:hover { transform: translateY(-3px); }
+
+.card img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  display: block;
+}
+
+/* fallback agar rasm yuklanmasa */
+.card img::after {
+  content: '🍽';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  background: #222;
+  width: 100%;
+  height: 170px;
+}
+
+.info {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px 10px 10px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.92));
+}
+
+.info h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.info p {
+  margin: 4px 0 0;
+  color: #ef7918;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* FLOATING ORDER BUTTON */
+.order-fixed {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #ef7918;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  box-shadow: 0 5px 20px rgba(239,121,24,0.5);
+  z-index: 1000;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.order-fixed:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(239,121,24,0.6);
+}
+
+/* BACK LINK */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #999;
+  text-decoration: none;
+  font-size: 13px;
+  padding: 10px 15px 0;
+  transition: color 0.2s;
+}
+
+.back-link:hover { color: #ef7918; }
+</style>
+</head>
+<body>
+
+<!-- STICKY HEADER -->
+<div class="header">
+  <div class="header-top">
+    <img src="Grato.png" class="header-logo" alt="Grato">
+    <span class="header-title">Grato Menyu</span>
+  </div>
+
+  <div class="search-wrap">
+    <input id="searchInput" type="text" placeholder="🔍 Taom nomi bo'yicha qidirish...">
+  </div>
+
+  <div class="buttons">
+    <button data-type="all" class="active">Hammasi</button>
+    <button data-type="first">🍲 1-taom</button>
+    <button data-type="second">🍽 2-taom</button>
+    <button data-type="salat">🥗 Salatlar</button>
+  </div>
+</div>
+
+<!-- BACK LINK -->
+<a href="index.html" class="back-link">← Bosh sahifaga qaytish</a>
+
+<!-- CATEGORY LABELS + CARDS -->
+<div id="label-first" class="category-label">🍲 1-taom – Sho'rvalar</div>
+<div class="menu" id="grid-first">
+  <div class="card first">
+    <img src="images/1-taom/optimized_1.webp" alt="Tushonka sho'rva" loading="lazy">
+    <div class="info"><h3>Tushonka sho'rva</h3><p>40 000 so'm</p></div>
+  </div>
+  <div class="card first">
+    <img src="images/1-taom/optimized_2.webp" alt="Balaza sho'rva" loading="lazy">
+    <div class="info"><h3>Balaza sho'rva</h3><p>25 000 so'm</p></div>
+  </div>
+  <div class="card first">
+    <img src="images/1-taom/optimized_3.webp" alt="Frikadelki sho'rva" loading="lazy">
+    <div class="info"><h3>Frikadelki sho'rva</h3><p>25 000 so'm</p></div>
+  </div>
+  <div class="card first">
+    <img src="images/1-taom/optimized_5.webp" alt="Solyanka sho'rva" loading="lazy">
+    <div class="info"><h3>Solyanka sho'rva</h3><p>30 000 so'm</p></div>
+  </div>
+</div>
+
+<div id="label-second" class="category-label">🍽 2-taom – Asosiy taomlar</div>
+<div class="menu" id="grid-second">
+  <div class="card second">
+    <img src="images/optimized_batch2_3.webp" alt="Sosiska testa" loading="lazy">
+    <div class="info"><h3>Sosiska testa</h3><p>7 000 so'm</p></div>
+  </div>
+  <div class="card second">
+    <img src="images/optimized_batch2_4.webp" alt="Go'shtli somsa" loading="lazy">
+    <div class="info"><h3>Go'shtli somsa</h3><p>7 000 so'm</p></div>
+  </div>
+  <div class="card second">
+    <img src="images/optimized_batch2_5.webp" alt="Blinchik tvorog va banana" loading="lazy">
+    <div class="info"><h3>Blinchik tvorog&banana</h3><p>6 000 so'm</p></div>
+  </div>
+  <div class="card second">
+    <img src="images/optimized_batch2_6.webp" alt="Go'shtli say" loading="lazy">
+    <div class="info"><h3>Go'shtli say</h3><p>45 000 so'm</p></div>
+  </div>
+  <div class="card second">
+    <img src="images/optimized_batch2_7.webp" alt="Go'shtli chuchvara" loading="lazy">
+    <div class="info"><h3>Go'shtli chuchvara</h3><p>30 000 so'm</p></div>
+  </div>
+  <div class="card second">
+    <img src="images/optimized_batch2_8.webp" alt="Turkcha sarmabetti" loading="lazy">
+    <div class="info"><h3>Turkcha sarmabetti</h3><p>25 000 so'm</p></div>
+  </div>
+  <div class="card second">
+    <img src="images/optimized_batch2_9.webp" alt="Tovuqli say" loading="lazy">
+    <div class="info"><h3>Tovuqli say</h3><p>40 000 so'm</p></div>
+  </div>
+  <div class="card second">
+    <img src="images/optimized_batch2_10.webp" alt="Kotlet go'shtli" loading="lazy">
+    <div class="info"><h3>Kotlet go'shtli</h3><p>15 000 so'm</p></div>
+  </div>
+  <div class="card second">
+    <img src="images/0a68ac5d-39d2-421d-ba33-a57f5152e36f.jpg" alt="Kotlet pomidor va pishloqli" loading="lazy">
+    <div class="info"><h3>Kotlet pomidor va pishloqli</h3><p>18 000 so'm</p></div>
+  </div>
+  <div class="card second">
+    <img src="images/440dd845-7b92-4e6c-95b8-28743eb9c8dc.jpg" alt="Tuxumbarak" loading="lazy">
+    <div class="info"><h3>Tuxumbarak</h3><p>5 000 so'm</p></div>
+  </div>
+  <div class="card second">
+    <img src="images/51f46064-6c01-4552-823a-5b517f813886.jpg" alt="Golubsi asorti" loading="lazy">
+    <div class="info"><h3>Golubsi asorti</h3><p>30 000 so'm</p></div>
+  </div>
+  <div class="card second">
+    <img src="images/766bd7e7-283d-447d-800f-0a5f1086452a.jpg" alt="Tovuqli kotlet" loading="lazy">
+    <div class="info"><h3>Tovuqli kotlet</h3><p>15 000 so'm</p></div>
+  </div>
+  <div class="card second">
+    <img src="images/94bf73f3-f60e-4aa0-a816-8e395b219659.jpg" alt="Tovuq va qo'ziqorinli rulet" loading="lazy">
+    <div class="info"><h3>Tovuq va qo'ziqorinli rulet (kg)</h3><p>100 000 so'm</p></div>
+  </div>
+  <div class="card second">
+    <img src="images/b1e459ba-bb4b-4d63-b470-adee62580cab.jpg" alt="Teriyaki tovuqli" loading="lazy">
+    <div class="info"><h3>Teriyaki tovuqli</h3><p>40 000 so'm</p></div>
+  </div>
+  <div class="card second">
+    <img src="images/e9842175-63b3-4ac1-bc2e-9ba7f774d167.jpg" alt="Tovuq va sabzavotli jiz" loading="lazy">
+    <div class="info"><h3>Tovuq va sabzavotli jiz (kg)</h3><p>80 000 so'm</p></div>
+  </div>
+  <div class="card second">
+    <img src="images/ebe4e868-3cd9-433b-8ed9-3db14619bc6e.jpg" alt="Teriyaki go'shtli" loading="lazy">
+    <div class="info"><h3>Teriyaki go'shtli</h3><p>45 000 so'm</p></div>
+  </div>
+  <div class="card second">
+    <img src="images/f24a2df8-9368-43db-b012-731a3cad5dac.jpg" alt="Podjarka" loading="lazy">
+    <div class="info"><h3>Podjarka</h3><p>40 000 so'm</p></div>
+  </div>
+  <div class="card second">
+    <img src="images/Qurtoba.jpg" alt="Qurutoba" loading="lazy">
+    <div class="info"><h3>Qurutoba</h3><p>70 000 so'm</p></div>
+  </div>
+</div>
+
+<div id="label-salat" class="category-label">🥗 Salatlar</div>
+<div class="menu" id="grid-salat">
+  <div class="card salat">
+    <img src="images/Salatlar/Adana.webp" alt="Adana salati" loading="lazy">
+    <div class="info"><h3>Adana salati</h3><p>40 000 so'm</p></div>
+  </div>
+  <div class="card salat">
+    <img src="images/Salatlar/BahorSalati.webp" alt="Bahor salati" loading="lazy">
+    <div class="info"><h3>Bahor salati</h3><p>30 000 so'm</p></div>
+  </div>
+  <div class="card salat">
+    <img src="images/Salatlar/Baklajan rulet.webp" alt="Baqlajon rulet" loading="lazy">
+    <div class="info"><h3>Baqlajon rulet</h3><p>40 000 so'm</p></div>
+  </div>
+  <div class="card salat">
+    <img src="images/Salatlar/Bavarski.webp" alt="Bavarskiy" loading="lazy">
+    <div class="info"><h3>Bavarskiy</h3><p>30 000 so'm</p></div>
+  </div>
+  <div class="card salat">
+    <img src="images/Salatlar/Fransuzki.webp" alt="Fransuz salati" loading="lazy">
+    <div class="info"><h3>Fransuz salati</h3><p>30 000 so'm</p></div>
+  </div>
+  <div class="card salat">
+    <img src="images/Salatlar/Grato.webp" alt="Grato salati" loading="lazy">
+    <div class="info"><h3>Grato salati</h3><p>35 000 so'm</p></div>
+  </div>
+  <div class="card salat">
+    <img src="images/Salatlar/Qarsildoq baqlajan.webp" alt="Qarsildoq Baqlajon" loading="lazy">
+    <div class="info"><h3>Qarsildoq Baqlajon</h3><p>45 000 so'm</p></div>
+  </div>
+  <div class="card salat">
+    <img src="images/Salatlar/Seul.webp" alt="Seul" loading="lazy">
+    <div class="info"><h3>Seul</h3><p>35 000 so'm</p></div>
+  </div>
+  <div class="card salat">
+    <img src="images/Salatlar/vinegret.webp" alt="Vinegret" loading="lazy">
+    <div class="info"><h3>Vinegret</h3><p>20 000 so'm</p></div>
+  </div>
+</div>
+
+<p id="emptyState">😔 Hech narsa topilmadi.</p>
+
+<a href="https://t.me/Gratodeliverybot" class="order-fixed">💬 Buyurtma berish</a>
+
+<script>
+const searchInput = document.getElementById('searchInput');
+const emptyState  = document.getElementById('emptyState');
+const allCards    = document.querySelectorAll('.card');
+const buttons     = document.querySelectorAll('.buttons button');
+
+const labels = {
+  first:  document.getElementById('label-first'),
+  second: document.getElementById('label-second'),
+  salat:  document.getElementById('label-salat'),
+};
+
+let currentFilter = 'all';
+
+function applyFilters() {
+  const query = searchInput.value.trim().toLowerCase();
+  const counts = { first: 0, second: 0, salat: 0 };
+
+  allCards.forEach(card => {
+    const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+    const type  = ['first','second','salat'].find(t => card.classList.contains(t)) || '';
+
+    const matchCat    = currentFilter === 'all' || card.classList.contains(currentFilter);
+    const matchSearch = !query || title.includes(query);
+    const visible     = matchCat && matchSearch;
+
+    card.style.display = visible ? 'block' : 'none';
+    if (visible && type) counts[type]++;
+  });
+
+  // Category labels — faqat "all" rejimda va qidiruv bo'sh bo'lganda ko'rsat
+  const showLabels = currentFilter === 'all' && !query;
+  Object.entries(labels).forEach(([type, el]) => {
+    el.classList.toggle('visible', showLabels && counts[type] > 0);
+  });
+
+  const total = Object.values(counts).reduce((a,b) => a+b, 0);
+  emptyState.style.display = total === 0 ? 'block' : 'none';
+}
+
+buttons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentFilter = btn.dataset.type;
+    buttons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyFilters();
+  });
+});
+
+searchInput.addEventListener('input', applyFilters);
+applyFilters();
+</script>
+</body>
+</html>
