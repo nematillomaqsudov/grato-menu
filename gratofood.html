@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grato Kafe | Buxoro</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --amber-deep:  #412402;
+    --amber-mid:   #854F0B;
+    --amber-warm:  #BA7517;
+    --amber-main:  #EF9F27;
+    --amber-light: #FAC775;
+    --amber-pale:  #FAEEDA;
+    --green-dot:   #3B6D11;
+    --white:       #ffffff;
+    --text-dark:   #2E1800;
+    --text-mid:    #6B3A10;
+    --radius-card: 18px;
+    --radius-btn:  12px;
+    --radius-pill: 50px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #FFF8EE;
+    color: var(--text-dark);
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  @keyframes gradShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-7px); }
+  }
+  @keyframes pulseRing {
+    0%   { box-shadow: 0 0 0 0px rgba(239,159,39,0.55); }
+    100% { box-shadow: 0 0 0 18px rgba(239,159,39,0); }
+  }
+  @keyframes shimmer {
+    0%, 100% { opacity: 0.35; }
+    50%       { opacity: 0.7; }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #BA7517, #EF9F27, #FAC775, #EF9F27, #854F0B, #EF9F27, #FAC775);
+    background-size: 400% 400%;
+    animation: gradShift 7s ease infinite;
+    padding: 3.5rem 1.5rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 55% 40% at 15% 85%, rgba(255,255,255,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 45% 35% at 85% 15%, rgba(255,255,255,0.13) 0%, transparent 60%);
+    animation: shimmer 4s ease-in-out infinite;
+  }
+  .hero-grid {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.025) 0, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 28px);
+  }
+
+  .logo-wrap {
+    width: 92px; height: 92px;
+    border-radius: 26px;
+    margin: 0 auto 1.25rem;
+    overflow: hidden;
+    border: 2.5px solid rgba(255,255,255,0.65);
+    background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    animation: float 3.8s ease-in-out infinite, pulseRing 2.6s ease-out infinite;
+    position: relative; z-index: 2;
+  }
+  .logo-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px; font-weight: 600;
+    color: var(--amber-deep);
+    letter-spacing: 0.3px;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+    position: relative; z-index: 2;
+    animation: fadeUp 0.7s ease 0.1s both;
+  }
+  .hero-sub {
+    font-size: 14px; color: rgba(65,36,2,0.6);
+    margin: 4px 0 1.25rem;
+    position: relative; z-index: 2;
+    animation: fadeUp 0.7s ease 0.2s both;
+  }
+  .open-badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(255,255,255,0.38);
+    border: 0.5px solid rgba(255,255,255,0.55);
+    border-radius: var(--radius-pill);
+    padding: 7px 18px;
+    font-size: 13px; font-weight: 500;
+    color: var(--amber-deep);
+    position: relative; z-index: 2;
+    animation: fadeUp 0.7s ease 0.3s both;
+  }
+  .open-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--green-dot);
+    display: inline-block;
+  }
+
+  /* ── LINKS ── */
+  .links-section {
+    padding: 1.5rem 1.25rem 0.5rem;
+  }
+  .links-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .link-btn {
+    display: flex; align-items: center; gap: 10px;
+    background: #fff;
+    border: 1px solid rgba(186,117,23,0.2);
+    border-radius: var(--radius-btn);
+    padding: 13px 15px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-size: 13px; font-weight: 500;
+    transition: background 0.15s, transform 0.1s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .link-btn:hover { background: var(--amber-pale); transform: translateY(-1px); }
+  .link-btn:active { transform: scale(0.97); }
+  .link-icon { font-size: 17px; width: 20px; text-align: center; }
+  .link-btn.order {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, var(--amber-warm), var(--amber-main));
+    color: #fff; border: none;
+    justify-content: center; font-size: 15px;
+    padding: 15px;
+    border-radius: var(--radius-card);
+    margin-top: 2px;
+  }
+  .link-btn.order:hover { background: linear-gradient(135deg, #a36612, #d88c1f); transform: translateY(-1px); }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex; align-items: center; gap: 12px;
+    padding: 1.5rem 1.25rem 0.75rem;
+  }
+  .divider-line { flex: 1; height: 1px; background: rgba(186,117,23,0.2); }
+  .divider-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--amber-warm);
+  }
+
+  /* ── TABS ── */
+  .tabs-wrap { padding: 0 1.25rem 1rem; overflow-x: auto; }
+  .tabs { display: flex; gap: 7px; width: max-content; }
+  .tab {
+    padding: 7px 16px; font-size: 13px; font-weight: 500;
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(186,117,23,0.25);
+    background: transparent; cursor: pointer;
+    color: var(--text-mid);
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .tab.active {
+    background: linear-gradient(135deg, var(--amber-warm), var(--amber-main));
+    color: #fff; border-color: transparent;
+  }
+  .tab:hover:not(.active) { background: var(--amber-pale); }
+
+  /* ── MENU GRID ── */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 0 1.25rem;
+  }
+  .menu-card {
+    background: #fff;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    border: 1px solid rgba(186,117,23,0.12);
+    transition: transform 0.15s;
+  }
+  .menu-card:hover { transform: translateY(-2px); }
+  .menu-card:active { transform: scale(0.98); }
+  .menu-img-wrap {
+    width: 100%; height: 115px;
+    background: var(--amber-pale);
+    overflow: hidden;
+  }
+  .menu-img-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transition: transform 0.3s;
+  }
+  .menu-card:hover .menu-img-wrap img { transform: scale(1.05); }
+  .menu-info { padding: 10px 12px 12px; }
+  .menu-name {
+    font-size: 12.5px; font-weight: 500;
+    color: var(--text-dark);
+    line-height: 1.35; margin-bottom: 5px;
+  }
+  .menu-price {
+    font-size: 14px; font-weight: 600;
+    color: var(--amber-warm);
+    font-family: 'Playfair Display', serif;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 2.5rem;
+    padding: 1.5rem 1.25rem 2.5rem;
+    text-align: center;
+    border-top: 1px solid rgba(186,117,23,0.15);
+  }
+  .footer p { font-size: 12px; color: var(--text-mid); opacity: 0.7; }
+
+  /* scrollbar hide */
+  .tabs-wrap::-webkit-scrollbar { display: none; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-grid"></div>
+  <div class="logo-wrap">
+    <img src="https://gratofood.uz/Grato.png" alt="Grato logo">
+  </div>
+  <h1>Grato Kafe</h1>
+  <p class="hero-sub">Buxoro shahri</p>
+  <div class="open-badge">
+    <span class="open-dot"></span>
+    Ochiq · 08:00 – 22:00
+  </div>
+</div>
+
+<!-- LINKS -->
+<div class="links-section">
+  <div class="links-grid">
+    <a class="link-btn" href="tel:+998943650036">
+      <span class="link-icon">📞</span> Telefon
+    </a>
+    <a class="link-btn" href="https://t.me/Grato_kafe">
+      <span class="link-icon">✈️</span> Telegram
+    </a>
+    <a class="link-btn" href="https://www.instagram.com/grato_food">
+      <span class="link-icon">📸</span> Instagram
+    </a>
+    <a class="link-btn" href="https://yandex.ru/navi/org/grato/68324601379">
+      <span class="link-icon">📍</span> Manzil
+    </a>
+    <a class="link-btn order" href="https://t.me/Gratodeliverybot">
+      🛵 &nbsp;Buyurtma berish
+    </a>
+  </div>
+</div>
+
+<!-- DIVIDER -->
+<div class="divider">
+  <div class="divider-line"></div>
+  <span class="divider-label">Menyu</span>
+  <div class="divider-line"></div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab active" onclick="filterMenu('all', this)">Hammasi</button>
+    <button class="tab" onclick="filterMenu('1taom', this)">1-taom</button>
+    <button class="tab" onclick="filterMenu('2taom', this)">2-taom</button>
+    <button class="tab" onclick="filterMenu('salat', this)">Salatlar</button>
+  </div>
+</div>
+
+<!-- MENU -->
+<div class="menu-grid" id="menuGrid"></div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>© 2025 Grato Kafe · Buxoro</p>
+</div>
+
+<script>
+const items = [
+  { name: "Tushonka sho'rva",       price: "40 000", cat: "1taom", img: "https://gratofood.uz/images/1-taom/optimized_1.webp" },
+  { name: "Balaza sho'rva",         price: "25 000", cat: "1taom", img: "https://gratofood.uz/images/1-taom/optimized_2.webp" },
+  { name: "Frikadelki sho'rva",     price: "25 000", cat: "1taom", img: "https://gratofood.uz/images/1-taom/optimized_3.webp" },
+  { name: "Solyanka sho'rva",       price: "30 000", cat: "1taom", img: "https://gratofood.uz/images/1-taom/optimized_5.webp" },
+  { name: "Sosiska testa",          price: "7 000",  cat: "2taom", img: "https://gratofood.uz/images/optimized_batch2_3.webp" },
+  { name: "Go'shtli somsa",         price: "7 000",  cat: "2taom", img: "https://gratofood.uz/images/optimized_batch2_4.webp" },
+  { name: "Blinchik tvorog & banana", price: "6 000", cat: "2taom", img: "https://gratofood.uz/images/optimized_batch2_5.webp" },
+  { name: "Go'shtli say",           price: "45 000", cat: "2taom", img: "https://gratofood.uz/images/optimized_batch2_6.webp" },
+  { name: "Go'shtli chuchvara",     price: "30 000", cat: "2taom", img: "https://gratofood.uz/images/optimized_batch2_7.webp" },
+  { name: "Turkcha sarmabetti",     price: "25 000", cat: "2taom", img: "https://gratofood.uz/images/optimized_batch2_8.webp" },
+  { name: "Tovuqli say",            price: "40 000", cat: "2taom", img: "https://gratofood.uz/images/optimized_batch2_9.webp" },
+  { name: "Kotlet go'shtli",        price: "15 000", cat: "2taom", img: "https://gratofood.uz/images/optimized_batch2_10.webp" },
+  { name: "Kotlet pomidor va pishloqli", price: "18 000", cat: "2taom", img: "https://gratofood.uz/images/0a68ac5d-39d2-421d-ba33-a57f5152e36f.jpg" },
+  { name: "Tuxumbarak",             price: "5 000",  cat: "2taom", img: "https://gratofood.uz/images/51f46064-6c01-4552-823a-5b517f813886.jpg" },
+  { name: "Golubsi asorti",         price: "30 000", cat: "2taom", img: "https://gratofood.uz/images/51f46064-6c01-4552-823a-5b517f813886.jpg" },
+  { name: "Tovuqli kotlet",         price: "15 000", cat: "2taom", img: "https://gratofood.uz/images/766bd7e7-247b-485f-800f-0a5f1086452a.jpg" },
+  { name: "Teriyaki tovuqli",       price: "40 000", cat: "2taom", img: "https://gratofood.uz/images/b1e459ba-bb4b-4d63-b470-adee62580cab.jpg" },
+  { name: "Teriyaki go'shtli",      price: "45 000", cat: "2taom", img: "https://gratofood.uz/images/ebe4e868-3cd9-433b-8ed9-3db14619bc6e.jpg" },
+  { name: "Podjarka",               price: "40 000", cat: "2taom", img: "https://gratofood.uz/images/f24a2df8-9368-43db-b012-731a3cad5dac.jpg" },
+  { name: "Qurutoba",               price: "70 000", cat: "2taom", img: "https://gratofood.uz/images/Qurtoba.jpg" },
+  { name: "Adana salati",           price: "40 000", cat: "salat", img: "https://gratofood.uz/images/Salatlar/Adana.webp" },
+  { name: "Bahor salati",           price: "30 000", cat: "salat", img: "https://gratofood.uz/images/Salatlar/BahorSalati.webp" },
+  { name: "Baqlajon rulet",         price: "40 000", cat: "salat", img: "https://gratofood.uz/images/Salatlar/Baklajan rulet.webp" },
+  { name: "Bavarskiy",              price: "30 000", cat: "salat", img: "https://gratofood.uz/images/Salatlar/Bavarski.webp" },
+  { name: "Fransuz salati",         price: "30 000", cat: "salat", img: "https://gratofood.uz/images/Salatlar/Fransuzki.webp" },
+  { name: "Grato salati",           price: "35 000", cat: "salat", img: "https://gratofood.uz/images/Salatlar/Grato.webp" },
+  { name: "Qarsildoq Baqlajon",     price: "45 000", cat: "salat", img: "https://gratofood.uz/images/Salatlar/Qarsildoq baqlajan.webp" },
+  { name: "Seul",                   price: "35 000", cat: "salat", img: "https://gratofood.uz/images/Salatlar/Seul.webp" },
+  { name: "Vinegret",               price: "20 000", cat: "salat", img: "https://gratofood.uz/images/Salatlar/vinegret.webp" },
+];
+
+function renderMenu(cat) {
+  const grid = document.getElementById('menuGrid');
+  const list = cat === 'all' ? items : items.filter(i => i.cat === cat);
+  grid.innerHTML = list.map(item => `
+    <div class="menu-card">
+      <div class="menu-img-wrap">
+        <img src="${item.img}" alt="${item.name}" loading="lazy"
+          onerror="this.parentElement.style.background='#FAEEDA'">
+      </div>
+      <div class="menu-info">
+        <div class="menu-name">${item.name}</div>
+        <div class="menu-price">${item.price} so'm</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterMenu(cat, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  renderMenu(cat);
+}
+
+renderMenu('all');
+</script>
+</body>
+</html>
